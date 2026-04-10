@@ -4,6 +4,9 @@
 #include <curl/curl.h>
 #include <sys/stat.h>
 
+#define URL_DB_FILE "/data/cop_aliases.txt"
+#define MAX_URL 1024
+
 struct Memory {
     char *data;
     size_t size;
@@ -20,11 +23,34 @@ size_t write_callback(void *ptr, size_t size, size_t nmemb, void *userdata) {
     return total;
 }
 
+    // Search Alias in the database (cop_aliases.txt) is it really a database? Well database sounds cooler than registry
+int find_alias(const char *input, char *url_out) {
+    FILE *f = fopen(URL_DB_FILE, "r");
+    if (!f) return 0;
+    char line[1024];
+    while (fgets(line, sizeof(line), f)) {
+        // remove trailing newline / carriage return
+        line[strcspn(line, "\r\n")] = 0;
+
+        char *alias = strtok(line, "=");
+        char *url = strtok(NULL, "\n");
+        if (alias && url && strcmp(alias, input) == 0) {
+            strncpy(url_out, url, MAX_URL-1);
+            url_out[MAX_URL-1] = 0;
+            fclose(f);
+            return 1;
+        }
+    }
+    fclose(f);
+    return 0;
+}
+
 int main(int argc, char *argv[]) {
     if (argc < 3) {
         fprintf(stderr, "Usage: %s <package_name> <url>\n", argv[0]);
         return 1;
     }
+
 
     char *pkg_name = argv[1];
     char *url = argv[2];
@@ -34,6 +60,7 @@ int main(int argc, char *argv[]) {
         fprintf(stderr, "libcurl init failed\n");
         return 1;
     }
+
 
     struct Memory mem = {0};
 
