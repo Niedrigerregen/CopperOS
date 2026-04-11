@@ -29,7 +29,6 @@ int find_alias(const char *input, char *url_out) {
     if (!f) return 0;
     char line[1024];
     while (fgets(line, sizeof(line), f)) {
-        // remove trailing newline / carriage return
         line[strcspn(line, "\r\n")] = 0;
 
         char *alias = strtok(line, "=");
@@ -46,21 +45,27 @@ int find_alias(const char *input, char *url_out) {
 }
 
 int main(int argc, char *argv[]) {
-    if (argc < 3) {
-        fprintf(stderr, "Usage: %s <package_name> <url>\n", argv[0]);
+    if (argc != 2) {
+        fprintf(stderr, "Usage: %s <package_name>\n", argv[0]);
         return 1;
     }
 
-
     char *pkg_name = argv[1];
-    char *url = argv[2];
+    char url[MAX_URL];
+
+    // Always look up the URL from the alias file
+    if (!find_alias(pkg_name, url)) {
+        fprintf(stderr, "Error: Package '%s' not found in %s\n", pkg_name, URL_DB_FILE);
+        return 1;
+    }
+
+    printf("Found package '%s'. Installing\n", pkg_name);
 
     CURL *curl = curl_easy_init();
     if (!curl) {
         fprintf(stderr, "libcurl init failed\n");
         return 1;
     }
-
 
     struct Memory mem = {0};
 

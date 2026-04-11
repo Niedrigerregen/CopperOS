@@ -14,7 +14,7 @@
 #include <string.h>
 #include <curl/curl.h>
 
-#define URL_DB_FILE "/data/aliases.txt"
+#define URL_DB_FILE "/data/srch_aliases.txt"
 #define MAX_URL 512
 
 struct Memory {

@@ -41,7 +41,8 @@ dirs:
 	mkdir -p $(ROOTFS)/tmp
 	mkdir -p $(ROOTFS)/etc
 	cp $(CURDIR)/data/quotes.txt $(ROOTFS)/data/
-	cp $(CURDIR)/data/aliases.txt $(ROOTFS)/data/
+	cp $(CURDIR)/data/srch_aliases.txt $(ROOTFS)/data/
+	cp $(CURDIR)/data/cop_aliases.txt $(ROOTFS)/data/
 
 init:
 	$(CC) $(CFLAGS_STATIC) $(INIT_SRC) -o $(INIT)
@@ -61,7 +62,7 @@ $(PKG_MGR_BIN): $(PKG_MGR_SRC)
 		echo "Error: $(PKG_MGR_SRC) not found"; \
 		exit 1; \
 	fi
-	$(CC) $(CFLAGS_STATIC) $(PKG_MGR_SRC) -o $(PKG_MGR_BIN)
+	gcc -O2 -s -I$(CURDIR)/include $(PKG_MGR_SRC) -o $(PKG_MGR_BIN) -lcurl
 
 # Use the prebuilt BusyBox from tools
 busybox:
