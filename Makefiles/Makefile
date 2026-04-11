@@ -18,9 +18,13 @@ COMMAND_SRC := $(filter-out \
 	$(SPECIAL_SRC), \
 	$(wildcard $(SRC_DIR)/*.c))
 
-.PHONY: all dirs init commands search busybox copy-libs cpio clean
+# Package manager source and binary
+PKG_MGR_SRC = $(CURDIR)/pkg_manager/src/cop_mng.c
+PKG_MGR_BIN = $(BIN_DIR)/cop
 
-all: dirs init commands search busybox copy-libs cpio
+.PHONY: all dirs init commands search busybox copy-libs cpio clean pkg
+
+all: dirs init commands pkg search busybox copy-libs cpio
 
 cpio:
 	cd $(ROOTFS) && find . | cpio -o -H newc > $(CURDIR)/iso/boot/rootfs.cpio
@@ -50,6 +54,15 @@ commands:
 	done
 	$(CC) $(CFLAGS_STATIC) $(SRC_DIR)/shell.c $(SRC_DIR)/cd.c -o $(BIN_DIR)/shell
 
+pkg: $(PKG_MGR_BIN)
+
+$(PKG_MGR_BIN): $(PKG_MGR_SRC)
+	@if [ ! -f $(PKG_MGR_SRC) ]; then \
+		echo "Error: $(PKG_MGR_SRC) not found"; \
+		exit 1; \
+	fi
+	$(CC) $(CFLAGS_STATIC) $(PKG_MGR_SRC) -o $(PKG_MGR_BIN)
+
 # Use the prebuilt BusyBox from tools
 busybox:
 	@echo "Using prebuilt BusyBox from tools/"
@@ -67,7 +80,7 @@ busybox:
 	@ln -sf busybox $(BIN_DIR)/ash
 	@echo "BusyBox added."
 
-# first time linking dynamically - kinda nervous
+# first time linking dynamically - kinda nervous https://tenor.com/view/shy-girl-maid-fingers-nervous-fingers-shying-gif-17287029592820735835
 search:
 	gcc -O2 -s -I$(CURDIR)/include $(SRC_DIR)/search.c -o $(BIN_DIR)/search -lcurl
 
