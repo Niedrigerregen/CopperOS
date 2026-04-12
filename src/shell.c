@@ -78,18 +78,23 @@ int main() {
         if (strcmp(command, "help") == 0) {
     printf("Available commands:\n");
     printf("help - Show this cool help message\n");
+    printf("---system---\n");
     printf("cd - Change directory\n"); // not really effective in a live OS but it can stay for when i turn it into an ... on demand OS?
     printf("ls - List files in the current directory\n");
+    printf("list - List files in the current directory\n");
     printf("shutdown - Shutdown the system\n");
+    printf("reboot - reboots your system\n");
     printf("clear - Clear the terminal screen\n");
     printf("echo - Echoes the input back to the terminal\n");
-    printf("search - search the web with a URL or an Alias\n");
-    printf("list - List files in the current directory\n");
+    printf("---utilities---\n");
     printf("math - Perform basic math operations\n");
-    printf("reboot - reboots your system\n");
     printf("fortune - shows you a random quote from the movie Fight Club\n");
     printf("date - shows you the current date and time\n");
     printf("tellmeafact - tells you exactly one fact");
+    printf("---internet---\n");
+    printf("search - search the web with a URL or an Alias\n");
+    printf("---package manager---\n");
+    printf("cop [package] - Installs a package from the Copper_DB repo\n");
     printf("more commands in the future...\n");
     continue;
 } 

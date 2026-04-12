@@ -1,1 +1,2 @@
 test=https://github.com/Niedrigerregen/Copper_DB/raw/main/bin/test
+nano=https://github.com/Niedrigerregen/Copper_DB/raw/main/bin/nano
