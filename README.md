@@ -34,5 +34,4 @@ There already are .iso images in the releases but if you want to generate your o
 This is also pretty easy with `bash bash/run.sh` which runs the OS in the terminal. Now you're finished!
 
 ## Future
-- Make my own package Manager and repo with fully TUI programs (needs a server and do i look like i got money for servers? I am doing everything on an intel i5 of 3rd gen man that chip is almost older than me)
-- debug. a lot. especially internet stuff.
+Make the Package manager better. That's all
