@@ -28,15 +28,15 @@ int main() {
     system("ifconfig eth0 10.0.2.15 netmask 255.255.255.0"); //hey! this one actually works without ethernet and i don't know why! No really i don't know how and i'm scared
     system("route add default gw 10.0.2.2 eth0"); // i found out now. QEMU is just giving out it's own IP so nothing of this would actually work on hardware but idc
     
-
+    // testing with google's DNS but i forgot to change it back but i don't really care
     FILE *f = fopen("/etc/resolv.conf","w");
     if(f) {
-        fprintf(f,"nameserver 8.8.8.8\n");
+        fprintf(f,"nameserver 8.8.8.8\n"); 
         fprintf(f,"nameserver 1.1.1.1\n");
         fclose(f);
     }
 
-    mount("devtmpfs", "/dev",  "devtmpfs", 0, NULL);
+    mount("devtmpfs", "/dev",  "devtmpfs", 0, NULL); // Mount folders
     mount("proc",     "/proc", "proc",     0, NULL);
     mount("sysfs",    "/sys",  "sysfs",    0, NULL);
     mount("tmpfs",    "/tmp",  "tmpfs",    0, NULL);
@@ -47,9 +47,9 @@ int main() {
     dup2(fd, 2); // stderr
     if (fd > 2) close(fd);
 
-    setenv("LD_LIBRARY_PATH", "/lib", 1);
-
-    execl("/bin/shell", "shell", NULL);
+    setenv("LD_LIBRARY_PATH", "/lib", 1); // Set library path for dynamic linking
+    setenv("TERM", "xterm-256color", 1); // Set terminal type for terminal apps
+    execl("/bin/shell", "shell", NULL); // Start the shell
 
     
     write(2, "execl failed!\n", 14);
