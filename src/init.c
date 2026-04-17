@@ -48,7 +48,7 @@ int main() {
     if (fd > 2) close(fd);
 
     setenv("LD_LIBRARY_PATH", "/lib", 1); // Set library path for dynamic linking
-    setenv("TERM", "xterm-256color", 1); // Set terminal type for terminal apps
+    setenv("TERM", "ansi", 1); // Set terminal type for compatibility with apps
     execl("/bin/shell", "shell", NULL); // Start the shell
 
     

@@ -22,9 +22,9 @@ COMMAND_SRC := $(filter-out \
 PKG_MGR_SRC = $(CURDIR)/pkg_manager/src/cop_mng.c
 PKG_MGR_BIN = $(BIN_DIR)/cop
 
-.PHONY: all dirs init commands search busybox copy-libs cpio clean pkg
+.PHONY: all dirs init commands search busybox copy-libs cpio clean pkg terminfo
 
-all: dirs init commands pkg search busybox copy-libs cpio
+all: dirs init commands pkg search busybox copy-libs terminfo cpio
 
 cpio:
 	cd $(ROOTFS) && find . | cpio -o -H newc > $(CURDIR)/iso/boot/rootfs.cpio
@@ -40,6 +40,7 @@ dirs:
 	mkdir -p $(ROOTFS)/sys
 	mkdir -p $(ROOTFS)/tmp
 	mkdir -p $(ROOTFS)/etc
+	mkdir -p $(ROOTFS)/usr/share/terminfo
 	cp $(CURDIR)/data/quotes.txt $(ROOTFS)/data/
 	cp $(CURDIR)/data/srch_aliases.txt $(ROOTFS)/data/
 	cp $(CURDIR)/data/cop_aliases.txt $(ROOTFS)/data/
@@ -85,7 +86,6 @@ busybox:
 search:
 	gcc -O2 -s -I$(CURDIR)/include $(SRC_DIR)/search.c -o $(BIN_DIR)/search -lcurl
 
-# Grab all the .so files search needs and dump them into rootfs/lib
 copy-libs:
 	@echo "Copying dynamic libraries for search..."
 	@mkdir -p $(ROOTFS)/lib
@@ -107,6 +107,9 @@ copy-libs:
 		echo "  WARNING: Could not find dynamic linker"; \
 	fi
 	@echo "Library copy complete."
+
+terminfo:
+	@cp -r /usr/share/terminfo/* $(ROOTFS)/usr/share/terminfo/ 2>/dev/null || true
 
 clean:
 	rm -rf $(ROOTFS) $(CURDIR)/iso/boot/rootfs.cpio
