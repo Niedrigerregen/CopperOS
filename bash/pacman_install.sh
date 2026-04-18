@@ -16,7 +16,8 @@ sudo pacman -S --needed --noconfirm \
     curl \
     openssl \
     zlib \
-    pkg-config
+    pkg-config \
+    ncurses
 
 echo "All dependencies installed."
 echo "CopperOS includes a prebuilt BusyBox with the required custom settings."

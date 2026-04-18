@@ -19,7 +19,9 @@ sudo apt install -y \
     libcurl4-openssl-dev \
     libssl-dev \
     zlib1g-dev \
-    pkg-config
+    pkg-config \
+    libncursesw6 \
+    libncurses-dev
 
 echo "All dependencies installed."
 echo "CopperOS includes a prebuilt BusyBox with:"

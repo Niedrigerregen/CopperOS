@@ -3,6 +3,7 @@
 
 CC = musl-gcc
 CFLAGS_STATIC = -static -O2 -s -I$(CURDIR)/include
+LDFLAGS_CURSES = -lncursesw
 
 SRC_DIR = $(CURDIR)/src
 ROOTFS  = $(CURDIR)/rootfs
@@ -54,7 +55,7 @@ commands:
 		$(CC) $(CFLAGS_STATIC) $$srcfile -o $(BIN_DIR)/$$prog; \
 		if [ $$? -ne 0 ]; then echo "Error compiling $$prog"; exit 1; fi; \
 	done
-	$(CC) $(CFLAGS_STATIC) $(SRC_DIR)/shell.c $(SRC_DIR)/cd.c -o $(BIN_DIR)/shell
+	$(CC) $(CFLAGS_STATIC) $(SRC_DIR)/shell.c $(SRC_DIR)/cd.c $(LDFLAGS_CURSES) -o $(BIN_DIR)/shell
 
 pkg: $(PKG_MGR_BIN)
 
@@ -96,6 +97,14 @@ copy-libs:
 			cp "$$lib" $(ROOTFS)/lib/; \
 		fi \
 	done
+	@# Copy ncursesw6 library if needed
+	@if [ -f /usr/lib/x86_64-linux-gnu/libncursesw.so.6 ]; then \
+		echo "  Copying libncursesw.so.6"; \
+		cp /usr/lib/x86_64-linux-gnu/libncursesw.so.6 $(ROOTFS)/lib/; \
+	elif [ -f /lib/x86_64-linux-gnu/libncursesw.so.6 ]; then \
+		echo "  Copying libncursesw.so.6"; \
+		cp /lib/x86_64-linux-gnu/libncursesw.so.6 $(ROOTFS)/lib/; \
+	fi
 	@# Copy dynamic linker
 	@if [ -f /lib64/ld-linux-x86-64.so.2 ]; then \
 		echo "  Copying /lib64/ld-linux-x86-64.so.2 to lib64/"; \

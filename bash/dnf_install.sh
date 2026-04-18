@@ -16,7 +16,9 @@ sudo dnf install -y \
     zlib-devel \
     pkgconfig \
     glibc-static \
-    libstdc++-static
+    libstdc++-static \
+    ncurses-devel \
+    ncurses-compat-libs
 
 # Some distros might need these additional packages
 sudo dnf install -y \
