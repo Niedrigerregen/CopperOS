@@ -34,4 +34,5 @@ There already are .iso images in the releases but if you want to generate your o
 This is also pretty easy with `bash bash/run.sh` which runs the OS in the terminal. Now you're finished!
 
 ## Future
-Make the Package manager better. That's all
+Expand package manager
+make a more user friendly file system (home/user/etc.)
