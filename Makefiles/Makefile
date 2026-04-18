@@ -1,9 +1,9 @@
 # CopperOS Makefile
-# Most stuff is statically linked, but search needs dynamic linking because libcurl is a pain
+# Most stuff is statically linked, but search and shell need dynamic linking for libcurl and libncursesw
 
 CC = musl-gcc
 CFLAGS_STATIC = -static -O2 -s -I$(CURDIR)/include
-LDFLAGS_CURSES = -lncursesw
+CFLAGS_DYNAMIC = -O2 -s -I$(CURDIR)/include
 
 SRC_DIR = $(CURDIR)/src
 ROOTFS  = $(CURDIR)/rootfs
@@ -11,21 +11,21 @@ BIN_DIR = $(ROOTFS)/bin
 INIT = $(ROOTFS)/init
 
 INIT_SRC = $(SRC_DIR)/init.c $(SRC_DIR)/cd.c
-SPECIAL_SRC = $(SRC_DIR)/search.c
+SPECIAL_SRC = $(SRC_DIR)/search.c $(SRC_DIR)/shell.c
 
 COMMAND_SRC := $(filter-out \
 	$(INIT_SRC) \
 	$(SRC_DIR)/shell.c \
-	$(SPECIAL_SRC), \
+	$(SRC_DIR)/search.c, \
 	$(wildcard $(SRC_DIR)/*.c))
 
 # Package manager source and binary
 PKG_MGR_SRC = $(CURDIR)/pkg_manager/src/cop_mng.c
 PKG_MGR_BIN = $(BIN_DIR)/cop
 
-.PHONY: all dirs init commands search busybox copy-libs cpio clean pkg terminfo
+.PHONY: all dirs init commands search shell busybox copy-libs cpio clean pkg terminfo
 
-all: dirs init commands pkg search busybox copy-libs terminfo cpio
+all: dirs init commands shell pkg search busybox copy-libs terminfo cpio
 
 cpio:
 	cd $(ROOTFS) && find . | cpio -o -H newc > $(CURDIR)/iso/boot/rootfs.cpio
@@ -55,7 +55,11 @@ commands:
 		$(CC) $(CFLAGS_STATIC) $$srcfile -o $(BIN_DIR)/$$prog; \
 		if [ $$? -ne 0 ]; then echo "Error compiling $$prog"; exit 1; fi; \
 	done
-	$(CC) $(CFLAGS_STATIC) $(SRC_DIR)/shell.c $(SRC_DIR)/cd.c $(LDFLAGS_CURSES) -o $(BIN_DIR)/shell
+
+shell:
+	@echo "Compiling shell dynamically with ncursesw..."
+	gcc $(CFLAGS_DYNAMIC) $(SRC_DIR)/shell.c $(SRC_DIR)/cd.c -lncursesw -o $(BIN_DIR)/shell
+	@if [ $$? -ne 0 ]; then echo "Error compiling shell"; exit 1; fi
 
 pkg: $(PKG_MGR_BIN)
 
@@ -83,27 +87,30 @@ busybox:
 	@ln -sf busybox $(BIN_DIR)/ash
 	@echo "BusyBox added."
 
-# first time linking dynamically - kinda nervous https://tenor.com/view/shy-girl-maid-fingers-nervous-fingers-shying-gif-17287029592820735835
 search:
-	gcc -O2 -s -I$(CURDIR)/include $(SRC_DIR)/search.c -o $(BIN_DIR)/search -lcurl
+	@echo "Compiling search dynamically with curl..."
+	gcc $(CFLAGS_DYNAMIC) $(SRC_DIR)/search.c -o $(BIN_DIR)/search -lcurl
+	@if [ $$? -ne 0 ]; then echo "Error compiling search"; exit 1; fi
 
 copy-libs:
-	@echo "Copying dynamic libraries for search..."
+	@echo "Copying dynamic libraries..."
 	@mkdir -p $(ROOTFS)/lib
 	@mkdir -p $(ROOTFS)/lib64
+	@# Copy libraries for search (curl)
 	@ldd $(BIN_DIR)/search 2>/dev/null | grep "=> /" | awk '{print $$3}' | while read lib; do \
 		if [ -n "$$lib" ] && [ -f "$$lib" ]; then \
 			echo "  Copying $$lib"; \
 			cp "$$lib" $(ROOTFS)/lib/; \
 		fi \
 	done
-	@# Copy ncursesw6 library if needed
-	@if [ -f /usr/lib/x86_64-linux-gnu/libncursesw.so.6 ]; then \
-		echo "  Copying libncursesw.so.6"; \
-		cp /usr/lib/x86_64-linux-gnu/libncursesw.so.6 $(ROOTFS)/lib/; \
-	elif [ -f /lib/x86_64-linux-gnu/libncursesw.so.6 ]; then \
-		echo "  Copying libncursesw.so.6"; \
-		cp /lib/x86_64-linux-gnu/libncursesw.so.6 $(ROOTFS)/lib/; \
+	@# Copy libraries for shell (ncursesw)
+	@if [ -f $(BIN_DIR)/shell ]; then \
+		ldd $(BIN_DIR)/shell 2>/dev/null | grep "=> /" | awk '{print $$3}' | while read lib; do \
+			if [ -n "$$lib" ] && [ -f "$$lib" ]; then \
+				echo "  Copying $$lib"; \
+				cp "$$lib" $(ROOTFS)/lib/; \
+			fi \
+		done; \
 	fi
 	@# Copy dynamic linker
 	@if [ -f /lib64/ld-linux-x86-64.so.2 ]; then \
