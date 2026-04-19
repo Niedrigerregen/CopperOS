@@ -1,2 +1,7 @@
 test=https://github.com/Niedrigerregen/Copper_DB/raw/main/bin/test
 nano=https://github.com/Niedrigerregen/Copper_DB/raw/main/bin/nano
+armstrong=https://github.com/Niedrigerregen/Copper_DB/raw/main/bin/armstrong
+bogosort=https://github.com/Niedrigerregen/Copper_DB/raw/main/bin/bogosort
+bubblesort=https://github.com/Niedrigerregen/Copper_DB/raw/main/bin/bubblesort
+prime=https://github.com/Niedrigerregen/Copper_DB/raw/main/bin/functionprime
+quicksort=https://github.com/Niedrigerregen/Copper_DB/raw/main/bin/quicksort
