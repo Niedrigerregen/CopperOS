@@ -14,7 +14,7 @@ browsers like Chrome do a similar method?
 # How to install/run
 First you'll need to clone this repository into your system by pasting this command into your terminal: `git clone https://github.com/Niedrigerregen/CopperOS.git`
 
-After that you'll need to open the Folder in your Terminal with `cd CopperOS` and install the requiered packages
+After that you'll need to open the Folder in your Terminal with `cd CopperOS` and install the requiered packages.
 
 ## How to install the required packages
 You have to call a different installation file based on which package manager you have. If you have the apt package manager just run `bash bash/apt_install.sh` 
