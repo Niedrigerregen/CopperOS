@@ -8,8 +8,7 @@ I wanted to understand operating systems, so I (the coolest guy ever) started bu
 From the graphics perspective it's very similar to MS-DOS as it's a custom shell OS but with the feature of a built-in search engine which under the hood is an html to text converter. Another feature would be the package manager "cop"
 
 ## Current stand 
-Right now it can "browse" the world wide web by using the IP of the QEMU and is equipped with various commands. Under the hood the "browsing" is just an HTTP request for the html file, then an html to text converter converts into text but don't 
-browsers like Chrome do a similar method?
+Right now it can "browse" the world wide web by using the IP of the QEMU and is equipped with various commands. Under the hood the "browsing" is just an HTTP request for the html file, then an html to text converter converts into text but 
 
 # How to install/run
 First you'll need to clone this repository into your system by pasting this command into your terminal: `git clone https://github.com/Niedrigerregen/CopperOS.git`
