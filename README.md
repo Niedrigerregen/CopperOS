@@ -1,20 +1,19 @@
 # CopperOS
 I wanted to understand operating systems, so I (the coolest guy ever) started building one.
 
-<img width="1865" height="1012" alt="CopperOS_v 1 0 0" src="https://github.com/user-attachments/assets/f3fe0f31-f76f-48ba-b66e-15df48babc3f" />
+<img width="1865" height="1012" alt="CopperOS_v 1 2 0" src="https://github.com/user-attachments/assets/f3fe0f31-f76f-48ba-b66e-15df48babc3f" />
 
 
 ## What makes it Special?
-From the graphics perspective it's very similar to MS-DOS as it's just a custom shell OS but with the feature of a built-in search engine which under the hood is an html to text converter but it still searches so don't underrate my work
+From the graphics perspective it's very similar to MS-DOS as it's a custom shell OS but with the feature of a built-in search engine which under the hood is an html to text converter. Another feature would be the package manager "cop"
 
 ## Current stand 
-Right now it can "browse" the world wide web by using the IP of the QEMU and is equipped with various commands. Under the hood the "browsing" is just an HTTP request for the html file, then an html to text converter converts into text but don't 
-browsers like Chrome do a similar method?
+Right now it can "browse" the world wide web by using the IP of the QEMU and is equipped with various commands. Under the hood the "browsing" is just an HTTP request for the html file, then an html to text converter converts into text but 
 
 # How to install/run
 First you'll need to clone this repository into your system by pasting this command into your terminal: `git clone https://github.com/Niedrigerregen/CopperOS.git`
 
-After that you'll need to open the Folder in your Terminal with `cd CopperOS` and install the requiered packages
+After that you'll need to open the Folder in your Terminal with `cd CopperOS` and install the requiered packages.
 
 ## How to install the required packages
 You have to call a different installation file based on which package manager you have. If you have the apt package manager just run `bash bash/apt_install.sh` 
