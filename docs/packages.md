@@ -6,4 +6,8 @@ tests if the cop command works
 
 ## nano
 
-A syntax higlighting text editor, but it doesn't work yet and i don't know why
+A syntax higlighting text editor
+
+## Quicksort, Bubblesort, Bogosort
+
+just a bunch of Sorting algorithms
