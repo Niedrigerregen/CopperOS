@@ -21,7 +21,7 @@ there are also scripts for the dnf manager and the pacman manager where you just
 
 ## Compiling the OS
 This step is not really necessary as my latest binaries are also comitted into the repository if you want to use them. Anyways if you want to compile it yourself, don't worry about my existing binaries as you
-can just overwrite my binaries with your new ones by inserting `bash bash/make.sh` after opening the CopperOS folder if you didn't already
+can just overwrite my binaries with your new ones by inserting `bash bash/make.sh` after opening the CopperOS folder if you didn't already.
 
 ## Optional: Generating a .iso image
 There already are .iso images in the releases but if you want to generate your own .iso image you can do it with `grub-mkrescue -o CopperOS.iso iso`
