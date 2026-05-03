@@ -5,3 +5,4 @@ bogosort=https://github.com/Niedrigerregen/Copper_DB/raw/main/bin/bogosort
 bubblesort=https://github.com/Niedrigerregen/Copper_DB/raw/main/bin/bubblesort
 prime=https://github.com/Niedrigerregen/Copper_DB/raw/main/bin/functionprime
 quicksort=https://github.com/Niedrigerregen/Copper_DB/raw/main/bin/quicksort
+chafa=https://github.com/Niedrigerregen/Copper_DB/raw/main/bin/chafa
