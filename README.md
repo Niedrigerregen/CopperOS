@@ -35,3 +35,7 @@ This is also pretty easy with `bash bash/run.sh` which runs the OS in the termin
 ## Future
 Expand package manager
 make a more user friendly file system (home/user/etc.)
+
+----
+*made by Loran Hisso, not AI*
+----
