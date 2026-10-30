@@ -1,5 +1,5 @@
 # CopperOS
-I wanted to understand operating systems, so I (the coolest guy ever) started building one.
+I wanted to understand operating systems, so I started building one.
 
 <img width="1865" height="1012" alt="CopperOS_v 1 2 0" src="https://github.com/user-attachments/assets/f3fe0f31-f76f-48ba-b66e-15df48babc3f" />
 
@@ -7,7 +7,7 @@ I wanted to understand operating systems, so I (the coolest guy ever) started bu
 ## What makes it Special?
 From the graphics perspective it's very similar to MS-DOS as it's a custom shell OS but with the feature of a built-in search engine which under the hood is an html to text converter. Another feature would be the package manager "cop".
 
-## Current stand 
+## Current status 
 Right now it can "browse" the world wide web by using the IP of the QEMU and is equipped with various commands. Under the hood the "browsing" is just an HTTP request for the html file, then an html to text converter converts into text but 
 
 # How to install/run
@@ -37,5 +37,5 @@ Expand package manager
 make a more user friendly file system (home/user/etc.)
 
 ----
-*made by Loran Hisso, not AI*
+*made by Loran Hisso*
 ----
