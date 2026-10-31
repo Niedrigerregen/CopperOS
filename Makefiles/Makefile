@@ -68,7 +68,7 @@ $(PKG_MGR_BIN): $(PKG_MGR_SRC)
 		echo "Error: $(PKG_MGR_SRC) not found"; \
 		exit 1; \
 	fi
-	gcc -O2 -s -I$(CURDIR)/include $(PKG_MGR_SRC) -o $(PKG_MGR_BIN) -lcurl
+	gcc -O2 -s -I$(CURDIR)/include $(PKG_MGR_SRC) -o $(PKG_MGR_BIN) -lcurl -lcrypto
 
 # Use the prebuilt BusyBox from tools
 busybox:
@@ -106,6 +106,15 @@ copy-libs:
 	@# Copy libraries for shell (ncursesw)
 	@if [ -f $(BIN_DIR)/shell ]; then \
 		ldd $(BIN_DIR)/shell 2>/dev/null | grep "=> /" | awk '{print $$3}' | while read lib; do \
+			if [ -n "$$lib" ] && [ -f "$$lib" ]; then \
+				echo "  Copying $$lib"; \
+				cp "$$lib" $(ROOTFS)/lib/; \
+			fi \
+		done; \
+	fi
+	@# Copy libraries for pkg manager (cop)
+	@if [ -f $(BIN_DIR)/cop ]; then \
+		ldd $(BIN_DIR)/cop 2>/dev/null | grep "=> /" | awk '{print $$3}' | while read lib; do \
 			if [ -n "$$lib" ] && [ -f "$$lib" ]; then \
 				echo "  Copying $$lib"; \
 				cp "$$lib" $(ROOTFS)/lib/; \

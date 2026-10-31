@@ -1,8 +1,8 @@
-test=https://github.com/Niedrigerregen/Copper_DB/raw/main/bin/test
-nano=https://github.com/Niedrigerregen/Copper_DB/raw/main/bin/nano
-armstrong=https://github.com/Niedrigerregen/Copper_DB/raw/main/bin/armstrong
-bogosort=https://github.com/Niedrigerregen/Copper_DB/raw/main/bin/bogosort
-bubblesort=https://github.com/Niedrigerregen/Copper_DB/raw/main/bin/bubblesort
-prime=https://github.com/Niedrigerregen/Copper_DB/raw/main/bin/functionprime
-quicksort=https://github.com/Niedrigerregen/Copper_DB/raw/main/bin/quicksort
-chafa=https://github.com/Niedrigerregen/Copper_DB/raw/main/bin/chafa
+test=https://github.com/Niedrigerregen/Copper_DB/raw/main/bin/test e37784ec8f62729ff38b0f8c7e41dd768929b268062b4df1798e557f1e6b311a
+nano=https://github.com/Niedrigerregen/Copper_DB/raw/main/bin/nano b58c0acb6db53a868ade85327e002f017fd02675c94f4b6e1fea756199e1f988
+armstrong=https://github.com/Niedrigerregen/Copper_DB/raw/main/bin/armstrong 0eb29eab7f3604f0da705b28a554a4518ee1ee103d918ed7d5bcd7c6951fedf9
+bogosort=https://github.com/Niedrigerregen/Copper_DB/raw/main/bin/bogosort 36d941f52759c27bb7cb3a5fc53b2d2a1c28d4e49fe69d7db3e54e0133bde0c6
+bubblesort=https://github.com/Niedrigerregen/Copper_DB/raw/main/bin/bubblesort 1d1c968d21c6c57fbb0446f63558246068db685a7ce60983bf26f73b9e3506ed
+prime=https://github.com/Niedrigerregen/Copper_DB/raw/main/bin/functionprime 4a7e9c978dce348ca80d4d3361018082b5fd11486403f95d3ec3789a68fc4deb
+quicksort=https://github.com/Niedrigerregen/Copper_DB/raw/main/bin/quicksort 6934464dd310ebf6995830c4f277e999430d91760458a2bff3def1110da26bff
+chafa=https://github.com/Niedrigerregen/Copper_DB/raw/main/bin/chafa a1caf4a0c2b387740d7b26660c8aa82e40146c05f450d8137a7965b2e1e268fc

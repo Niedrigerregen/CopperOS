@@ -90,11 +90,11 @@ int main() {
     printf("math - Perform basic math operations\n");
     printf("fortune - shows you a random quote from the movie Fight Club\n");
     printf("date - shows you the current date and time\n");
-    printf("tellmeafact - tells you exactly one fact");
+    printf("tellmeafact - tells you exactly one fact\n");
     printf("---internet---\n");
     printf("search - search the web with a URL or an Alias\n");
     printf("---package manager---\n");
-    printf("cop [package] - Installs a package from the Copper_DB repo\n");
+    printf("cop [package] - Installs a package from the Copper_DB repo now with 256-SHA verification!\n");
     printf("more commands in the future...\n");
     continue;
 } 
